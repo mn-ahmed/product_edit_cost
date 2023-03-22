@@ -1,16 +1,39 @@
-<?xml version ="1.0" encoding="utf-8"?>
-<!-- Copyright 2020-2021 Sodexis License OPL-1 (See LICENSE file for full copyright and licensing details). -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020-2023 Sodexis License OPL-1 (See LICENSE file for full copyright and licensing
+details). -->
 
 <odoo>
-     <record id="product_template_only_form_view" model="ir.ui.view">
-            <field name="name">product.template.only.form.view.inherit</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_only_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='standard_price']" position="replace">
-                    <field name="standard_price" attrs="{'readonly':['&amp;',['valuation','=','real_time'],['cost_method','in',['average','standard']]]}" 
-                        widget='monetary' options="{'currency_field': 'cost_currency_id', 'field_digits': True}" />
-                </xpath>
-            </field>
-     </record>
+    <record id="product_template_only_form_view" model="ir.ui.view">
+        <field name="name">product.template.only.form.view.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="before">
+                <field name="valuation" invisible="1" />
+                <field name="cost_method" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="attrs">
+                    {'readonly':['&amp;',['valuation','=','real_time'],['cost_method','in',['average','standard']]]}</attribute>
+                <attribute name="class">oe_inline px-2</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_product_only_form_view" model="ir.ui.view">
+        <field name="name">product.product.only.form.view.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="before">
+                <field name="valuation" invisible="1" />
+                <field name="cost_method" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="attrs">
+                    {'readonly':['&amp;',['valuation','=','real_time'],['cost_method','in',['average','standard']]]}</attribute>
+                <attribute name="class">oe_inline px-2</attribute>
+            </xpath>
+        </field>
+    </record>
 </odoo>

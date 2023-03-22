@@ -10,7 +10,7 @@
     'website': "http://sodexis.com/",
     'author': "Sodexis",
     'license': 'OPL-1',
-    'installable': False,
+    'installable': True,
     'application': False,
     'depends': [
         'product',
