@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2020-2023 Sodexis License OPL-1 (See LICENSE file for full copyright and licensing
 details). -->
 <odoo>
-     <record id="product_template_only_form_view" model="ir.ui.view">
+    <record id="product_template_only_form_view" model="ir.ui.view">
         <field name="name">product.template.only.form.view.inherit</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view" />
@@ -13,33 +13,52 @@ details). -->
                     class="oe_inline"
                     groups="!product_edit_cost.group_product_edit_cost"
                     readonly="1"
+                    widget='monetary'
+                    options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
                 />
                 <field
                     name="standard_price"
                     class="oe_inline"
                     groups="product_edit_cost.group_product_edit_cost"
+                    widget='monetary'
+                    options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
                 />
             </xpath>
+            <xpath expr="//div[@name='standard_price_uom']/span" position="replace">
+                <span groups="uom.group_uom" style="padding-left: 20px;">per
+                    <field name="uom_name" class="oe_inline" />
+                </span>
+            </xpath>
+
         </field>
     </record>
 
-     <record id="product_product_only_form_view" model="ir.ui.view">
+    <record id="product_product_only_form_view" model="ir.ui.view">
         <field name="name">product.product.only.form.view.inherit</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view" />
         <field name="arch" type="xml">
-             <xpath expr="//field[@name='standard_price']" position="replace">
+            <xpath expr="//field[@name='standard_price']" position="replace">
                 <field
                     name="standard_price"
                     class="oe_inline"
                     groups="!product_edit_cost.group_product_edit_cost"
                     readonly="1"
+                    widget='monetary'
+                    options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
                 />
                 <field
                     name="standard_price"
                     class="oe_inline"
                     groups="product_edit_cost.group_product_edit_cost"
+                    widget='monetary'
+                    options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
                 />
+            </xpath>
+            <xpath expr="//div[@name='standard_price_uom']/span" position="replace">
+                <span groups="uom.group_uom" style="padding-left: 20px;">per
+                    <field name="uom_name" class="oe_inline" />
+                </span>
             </xpath>
         </field>
     </record>
